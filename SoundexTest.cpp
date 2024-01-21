@@ -1,17 +1,18 @@
-class Soundex {
-
-};
-
 #include "gtest/gtest.h"
 
-TEST(SoundexTest, BasicAssertions)
-{
-    EXPECT_STRNE("hello", "world");
+#include "Soundex.hpp"
 
-    EXPECT_EQ(7 * 6, 42);
+class SoundexEncoding : public testing::Test {
+public:
+    Soundex soundex;
+};
+
+TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
+{ 
+   EXPECT_EQ(soundex.encode("A"), "A000");
 }
 
-TEST(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
-{ 
-   Soundex soundex;
+TEST_F(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
+{
+    EXPECT_EQ(soundex.encode("I"), "I000");
 }
