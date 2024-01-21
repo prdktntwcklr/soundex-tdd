@@ -9,10 +9,20 @@ public:
 
 TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
 { 
-   EXPECT_EQ(soundex.encode("A"), "A000");
+    ASSERT_EQ(soundex.encode("A"), "A000");
 }
 
 TEST_F(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
 {
-    EXPECT_EQ(soundex.encode("I"), "I000");
+    ASSERT_EQ(soundex.encode("I"), "I000");
+}
+
+TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits)
+{
+    ASSERT_EQ(soundex.encode("Ac"), "A200");
+}
+
+TEST_F(SoundexEncoding, IgnoresNonAlphabetics)
+{
+    ASSERT_EQ(soundex.encode("A#"), "A000");
 }
